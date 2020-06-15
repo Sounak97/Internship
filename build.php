@@ -116,7 +116,6 @@ if (isset($_POST['templateName']) && isset($_POST['task']))
 					  <div class="modal-body">
 						<?php 
 						   //  ob_start();
-						     $new=replaceTemplate(readTemplate($template['path']));
                          	 /* $fp = realpath("data.html");
 							   echo $new;
 						      if(is_writable($fp)){
@@ -130,19 +129,20 @@ if (isset($_POST['templateName']) && isset($_POST['task']))
 							  }else{
 							    echo "file has been deleted!";	  
 							  }*/
+							  echo($template['path']);
+							  $new=replaceTemplate(readTemplate($template['path']));
 							  echo $new;
 							  $time = time();
-							   
 							  $fnew = fopen($time.'.html','w');
 							  fflush($fnew);
 							  fwrite($fnew,$new);
 							  //echo $new;
-						//	  clearstatcache();
-							 // $cont = fread($fp,filesize($fp));
+							  //clearstatcache();
+							  // $cont = fread($fp,filesize($fp));
 							  fflush($fnew);
 							  fclose($fnew);
 							  //clearstatcache();
-							 // ob_clean();
+							  // ob_clean();
 							  //echo "$cont"; */
 						?>
 					  </div>

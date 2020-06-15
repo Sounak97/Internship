@@ -91,25 +91,17 @@ function collectTemplates(){
 
 		while (false !== ($entry = readdir($handle)))
 		{
-			if ($entry != '.' && $entry != '..')
+			if ($entry != '.' && $entry != '..' && strtolower(substr($entry, strrpos($entry, '.') + 1)) == 'html')
 			{
-				preg_match("/.*.html/", $entry, $template);
-
-				if (count($template))
-				{
-					$templates[$i]['path'] = __DIR__ . '/templates/' . $entry;
-					$templates[$i]['name'] = str_replace('.html', '', $entry);
-
-					$i++;
-				}
+				$templates[$i]['path'] = __DIR__ . '\\templates\\' . $entry;
+				$templates[$i]['name'] = str_replace('.html', '', $entry);
+				$i++;
 			}
 		}
 
 		closedir($handle);
 	}
-
 	return $templates;
-	
 }
 
 function readTemplate($file)
@@ -117,7 +109,7 @@ function readTemplate($file)
 	$handle   = fopen($file, "r");
 	$content  = fread($handle, filesize($file));
 	fclose($handle);
-
+	echo $content;
 	return $content;
 }
 
@@ -138,9 +130,9 @@ function replaceTemplate($content)
 	//$content = str_replace('{master}', $master, $content);
 
 	//$bachlor           = $_POST['bechlor']." ". $_POST['bachlor_college']." ".$_POST['bechlor_complrtion'];
-	$content = str_replace('{bachelor}', $.POST['bacehlor'], $content);
-	$content = str_replace('{bachelor_college}', $.POST['bacehlor_college'], $content);
-	$content = str_replace('{bachelor_completion}', $.POST['bacehlor_completion'], $content);
+	$content = str_replace('{bachelor}', $_POST['bacehlor'], $content);
+	$content = str_replace('{bachelor_college}', $_POST['bacehlor_college'], $content);
+	$content = str_replace('{bachelor_completion}', $_POST['bacehlor_completion'], $content);
      
 //	$class12           = $_POST['class_12']." ".$_POST['board_name']." ".$_POST['completion_12'];
 	$content = str_replace('{class_12}', $_POST['class_12'], $content);
